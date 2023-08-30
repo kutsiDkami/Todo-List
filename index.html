@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="content">
+      <h1>Todo Application</h1>
+      <div class="box-1">
+        <input type="text" placeholder="Todo Title" id="todoText" />
+        <input type="text" placeholder="description" id="todoTextdis" />
+        <button class="btn CRT" id="addTodo" onclick="addTask()">
+          Create Todo
+        </button>
+      </div>
+      <div class="ara">
+        <button class="btn CLT" onclick="clearTasks()">Clear Todos</button>
+        <button class="btn MAC">mark as completed</button>
+      </div>
+      <div class="box-2">
+        <table id="table-container">
+          <tr>
+            <th style="text-align: center"><input type="checkbox" /></th>
+            <th>Name</th>
+            <th>Desrciption</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="App.js"></script>
+  </body>
+</html>
