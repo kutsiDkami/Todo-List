@@ -14,10 +14,10 @@ function addTask() {
   } else {
     let tr = document.createElement("tr");
     tr.innerHTML = `
-        <th style="text-align: center"><input type="checkbox" /></th>
+        <th style="text-align: center"><input id="checkbox" type="checkbox" /></th>
      <th>${inputBox.value}</th> 
      <th>${inputBoxDes.value}</th> 
-     <th style="text-align: center">dene</th> 
+     <th class="yap" style="text-align: center">yapılmadı</th> 
      <th>
      <button class="btn CRT nn">Edit</button>
      <button class="btn CLT nn" id="delete-button">delete</button>
@@ -32,6 +32,16 @@ function addTask() {
     deleteButton.addEventListener("click", function () {
       // Delete işlevi burada eklenebilir
       tr.remove();
+    });
+    let checkbox = tr.querySelector("#checkbox");
+    let checkerd = tr.querySelector(".yap");
+    checkbox.addEventListener("click", function () {
+      if (checkbox.checked) {
+        checkerd.innerHTML = "yapıldı";
+        // Edit düğmesini burada işaretlemek isterseniz düğmenin sınıfını eklemeniz gerekebilir.
+      } else {
+        checkerd.innerHTML = "yapılmadı";
+      }
     });
   }
 }
