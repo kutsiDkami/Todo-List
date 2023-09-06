@@ -4,7 +4,7 @@ let inputBoxDes = document.getElementById("todoTextdis");
 let tableContainer = document.getElementById("table-container");
 let yapAll = document.getElementById("yap-All");
 
-addEventListener("keyup", function (e) {
+inputBoxDes.addEventListener("keyup", function (e) {
   if (e.keyCode == 13) {
     addTask();
   }
@@ -34,32 +34,40 @@ function addTask() {
     deleteButton.addEventListener("click", function () {
       tr.remove();
     });
-
+    let complete = document.querySelector("#complete");
     let checkbox = tr.querySelector("#checkbox");
     let checkerd = tr.querySelector(".yap");
-    checkbox.addEventListener("click", function () {
-      if (checkbox.checked) {
-        checkerd.innerHTML = "yapıldı";
-        checkerd.classList.add("MAC");
-        checkerd.classList.remove("CLT");
-        // Edit düğmesini burada işaretlemek isterseniz düğmenin sınıfını eklemeniz gerekebilir.
+    complete.addEventListener("click", function () {
+      if (yapAll.checked) {
+        if (yapAll.checked) {
+          checkbox.checked = true;
+          checkerd.innerHTML = "yapıldı";
+          checkerd.classList.add("MAC");
+          checkerd.classList.remove("CLT");
+        } else {
+          checkbox.checked = false;
+          checkerd.innerHTML = "yapılmadı";
+          checkerd.classList.add("CLT");
+          checkerd.classList.remove("MAC");
+        }
       } else {
-        checkerd.innerHTML = "yapılmadı";
-        checkerd.classList.add("CLT");
-        checkerd.classList.remove("MAC");
+        if (checkbox.checked) {
+          checkerd.innerHTML = "yapıldı";
+          checkerd.classList.add("MAC");
+          checkerd.classList.remove("CLT");
+        } else {
+          checkerd.innerHTML = "yapılmadı";
+          checkerd.classList.add("CLT");
+          checkerd.classList.remove("MAC");
+        }
       }
     });
+
     yapAll.addEventListener("click", function () {
       if (yapAll.checked) {
         checkbox.checked = true;
-        checkerd.innerHTML = "yapıldı";
-        checkerd.classList.add("MAC");
-        checkerd.classList.remove("CLT");
       } else {
         checkbox.checked = false;
-        checkerd.innerHTML = "yapılmadı";
-        checkerd.classList.add("CLT");
-        checkerd.classList.remove("MAC");
       }
     });
   }
@@ -79,10 +87,15 @@ function allYap() {
 */
 function clearTasks() {
   let allRows = document.querySelectorAll("tr"); // Tüm satırları al
-  allRows.forEach((row, index) => {
-    if (index !== 0) {
-      // İlk satır başlık olduğu için atla
-      row.remove();
-    }
-  });
+  const YesOrNo = confirm("emin misin");
+
+  if (YesOrNo == true) {
+    allRows.forEach((row, index) => {
+      if (index !== 0) {
+        row.remove();
+      }
+    });
+  } else {
+    alert("işlem başarısız");
+  }
 }
