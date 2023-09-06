@@ -86,7 +86,7 @@ function allYap() {
 }
 */
 function clearTasks() {
-  let allRows = document.querySelectorAll("tr"); // Tüm satırları al
+  let allRows = document.querySelectorAll("tr"); 
   const YesOrNo = confirm("emin misin");
 
   if (YesOrNo == true) {
