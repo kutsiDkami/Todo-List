@@ -6,6 +6,7 @@
   justify-items: center;
   width: 100%;
   height: 100vh;
+
   position: absolute;
   left: 0;
   right: 0;
@@ -14,9 +15,10 @@
 }
 
 .box-1 {
-  margin-left: 35%;
+  margin-left: 15%;
+
   text-align: left;
-  width: 30%;
+  width: 70%;
 
   border: 1px solid black;
   padding: 5px;
@@ -24,28 +26,31 @@
 .ara {
   justify-items: center;
   display: flex;
-  margin-left: 52%;
+  margin-left: 65%;
 }
 .btn {
-  width: 90px;
-  height: 40px;
+  width: 150px;
+  height: 50px;
   border-radius: 10px;
   border: none;
+  font-size: 20px;
   color: white;
   margin: 5px;
 }
 
 .yap {
-  border-radius: 15px;
+  border-radius: 70px;
+width: 150px;
+ font-size: 22px;
 }
 
-.CRT {
+.blue {
   background-color: rgb(0, 145, 255);
 }
-.CLT {
+.red {
   background-color: red;
 }
-.MAC {
+.green {
   background-color: rgb(9, 164, 9);
 }
 
@@ -61,17 +66,28 @@ li {
 }
 
 table {
-  width: 30%;
+  width: 70%;
   height: 25px;
   border-collapse: collapse;
   text-align: left;
-  margin-left: 35%;
+  margin-left: 15%;
 }
 
 .nn {
   height: 25px;
   width: 30%;
 }
-
+#todoText,
+#todoTextdis {
+  width: 250px;
+  height: 35px;
+  font-size: 18px;
+}
+#edit-input,
+#editDes-input {
+  width: 200px;
+  height: 30px;
+  font-size: 16px;
+}
 @media only screen and (max-width: 1395px) {
 }

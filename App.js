@@ -11,7 +11,7 @@ inputBoxDes.addEventListener("keyup", function (e) {
 });
 
 function addTask() {
-  if (inputBox.value === "" || inputBoxDes.value === "") {
+  if (inputBox.value.trimStart() == "" || inputBoxDes.value.trimStart() == "") {
     alert("hata");
   } else {
     let tr = document.createElement("tr");
@@ -19,10 +19,12 @@ function addTask() {
         <th style="text-align: center"><input id="checkbox" type="checkbox" /></th>
      <th id="editt">${inputBox.value}</th> 
      <th id="editDes">${inputBoxDes.value}</th> 
-     <th class="yap CLT" style="text-align: center">yapılmadı</th> 
+     <th class="yap red" style="text-align: center">yapılmadı</th> 
      <th id="saveD">
-     <button class="btn CRT nn edit" id="edit-button">Edit</button>
-     <button class="btn CLT nn" id="delete-button">delete</button>
+    
+     <button class="btn blue nn edit" id="edit-button">Edit</button> 
+     <button class="btn blue nn save"  id="save-button"  style="display: none">Save</button>
+     <button class="btn red nn" id="delete-button">delete</button>
      </th> `;
 
     tableContainer.appendChild(tr);
@@ -42,23 +44,23 @@ function addTask() {
         if (yapAll.checked) {
           checkbox.checked = true;
           checkerd.innerHTML = "yapıldı";
-          checkerd.classList.add("MAC");
-          checkerd.classList.remove("CLT");
+          checkerd.classList.add("green");
+          checkerd.classList.remove("red");
         } else {
           checkbox.checked = false;
           checkerd.innerHTML = "yapılmadı";
-          checkerd.classList.add("CLT");
-          checkerd.classList.remove("MAC");
+          checkerd.classList.add("red");
+          checkerd.classList.remove("green");
         }
       } else {
         if (checkbox.checked) {
           checkerd.innerHTML = "yapıldı";
-          checkerd.classList.add("MAC");
-          checkerd.classList.remove("CLT");
+          checkerd.classList.add("green");
+          checkerd.classList.remove("red");
         } else {
           checkerd.innerHTML = "yapılmadı";
-          checkerd.classList.add("CLT");
-          checkerd.classList.remove("MAC");
+          checkerd.classList.add("red");
+          checkerd.classList.remove("green");
         }
       }
     });
@@ -71,28 +73,31 @@ function addTask() {
       }
     });
 
-    let editt = tr.querySelector("#editt");
-    let editDes = tr.querySelector("#editDes");
-    var elit = tr.querySelector(".edit");
+    let editBox1 = tr.querySelector("#editt");
+    let editBox2 = tr.querySelector("#editDes");
+    let edit = tr.querySelector(".edit");
     let editButton = tr.querySelector("#edit-button");
-    let saved = tr.querySelector("#saveD");
-    elit.addEventListener("click", function () {
-      editt.innerHTML = '<input type="text" id="edit-input"  />';
-      editDes.innerHTML = '<input type="text" id="editDes-input" />';
-      saved.innerHTML = `
-        <button class="btn CRT nn save" >save</button>
-        <button class="btn CLT nn" id="delete-button">delete</button>
-         `;
-      let save = saved.querySelector(".save");
+    let saveButton = tr.querySelector("#save-button");
+
+    edit.addEventListener("click", function () {
+      editBox1.innerHTML = '<input type="text" id="edit-input"   />';
+      editBox2.innerHTML = '<input type="text" id="editDes-input" />';
+      editButton.style.display = "none";
+      saveButton.style.display = "inline-block";
+      let save = tr.querySelector(".save");
       let editInput = tr.querySelector("#edit-input");
       let editDesInput = tr.querySelector("#editDes-input");
+      editInput.value = `${inputBoxDes.value}`;
+      editDesInput.value = `${inputBoxDes.value}`;
       save.addEventListener("click", function () {
-        editt.innerHTML = `${editInput.value}`;
-        editDes.innerHTML = `${editDesInput.value}`;
-        saved.innerHTML = `
-        <button class="btn CRT nn edit" id="edit-button">Edit</button>
-        <button class="btn CLT nn" id="delete-button">delete</button>
-         `;
+        if (editInput.value.trim() === "" || editDesInput.value.trim() === "") {
+          alert("hata");
+        } else {
+          editBox1.innerHTML = `${editInput.value}`;
+          editBox2.innerHTML = `${editDesInput.value}`;
+          editButton.style.display = "inline-block";
+          saveButton.style.display = "none";
+        }
       });
     });
 
