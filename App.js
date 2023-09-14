@@ -2,7 +2,7 @@ let Add = document.getElementById("addTodo");
 let inputBox = document.getElementById("todoText");
 let inputBoxDes = document.getElementById("todoTextdis");
 let tableContainer = document.getElementById("table-container");
-let yapAll = document.getElementById("yap-All");
+let checkboxAll = document.getElementById("checkbox-All");
 
 inputBoxDes.addEventListener("keyup", function (e) {
   if (e.keyCode == 13) {
@@ -21,7 +21,6 @@ function addTask() {
      <th id="editDes">${inputBoxDes.value}</th> 
      <th class="yap red" style="text-align: center">yapılmadı</th> 
      <th id="saveD">
-    
      <button class="btn blue nn edit" id="edit-button">Edit</button> 
      <button class="btn blue nn save"  id="save-button"  style="display: none">Save</button>
      <button class="btn red nn" id="delete-button">delete</button>
@@ -40,8 +39,8 @@ function addTask() {
     let checkbox = tr.querySelector("#checkbox");
     let checkerd = tr.querySelector(".yap");
     complete.addEventListener("click", function () {
-      if (yapAll.checked) {
-        if (yapAll.checked) {
+      if (checkboxAll.checked) {
+        if (checkboxAll.checked) {
           checkbox.checked = true;
           checkerd.innerHTML = "yapıldı";
           checkerd.classList.add("green");
@@ -65,8 +64,8 @@ function addTask() {
       }
     });
 
-    yapAll.addEventListener("click", function () {
-      if (yapAll.checked) {
+    checkboxAll.addEventListener("click", function () {
+      if (checkboxAll.checked) {
         checkbox.checked = true;
       } else {
         checkbox.checked = false;
@@ -87,8 +86,10 @@ function addTask() {
       let save = tr.querySelector(".save");
       let editInput = tr.querySelector("#edit-input");
       let editDesInput = tr.querySelector("#editDes-input");
-      editInput.value = `${inputBoxDes.value}`;
-      editDesInput.value = `${inputBoxDes.value}`;
+      // editInput.value = `${inputBoxDes.value}`;
+      // editDesInput.value = `${inputBoxDes.value}`;
+      // editInput.value = `${editBox1.innerHTML}`;
+      //  editDesInput.value = `${editBox2.innerHTML}`;
       save.addEventListener("click", function () {
         if (editInput.value.trim() === "" || editDesInput.value.trim() === "") {
           alert("hata");
@@ -104,20 +105,8 @@ function addTask() {
     //  save.addEventListener("click", function () {});
   }
 }
-/*
-function allYap() {
-  if () {
-    checkerd.innerHTML = "yapıldı";
-    checkerd.classList.add("MAC");
-    checkerd.classList.remove("CLT");
-  } else {
-    checkerd.innerHTML = "yapılmadı";
-    checkerd.classList.add("CLT");
-    checkerd.classList.remove("MAC");
-  }
-}
-*/
 
+console.log(window);
 function clearTasks() {
   let allRows = document.querySelectorAll("tr");
   const YesOrNo = confirm("emin misin");
@@ -132,3 +121,40 @@ function clearTasks() {
     alert("işlem başarısız");
   }
 }
+
+// local data
+let MAIN_URL = "https://64fc6978605a026163ae77aa.mockapi.io/localDataBase";
+
+const showDataToHtml = document.querySelector(".data");
+
+const getTodos = async () => {
+  const response = await fetch(`${MAIN_URL}`);
+  const todos = await response.json();
+  showDataToHtml.innerHTML = `${JSON.stringify(todos)}`;
+  console.log(todos[0].title);
+};
+
+getTodos();
+
+// post
+let tr = document.querySelectorAll("tr");
+
+async function postJSON(data) {
+  try {
+    const response = await fetch(`${MAIN_URL}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    console.log("Success:", result);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+const data = { username: "example" };
+postJSON(data);
